@@ -11,6 +11,8 @@
   </head>
 
   <body>
+    <%= current_user.first_name if current_user %>
+    <%= link_to "Log out", logout_path, method: "delete" %>
     <%= yield %>
   </body>
 </html>

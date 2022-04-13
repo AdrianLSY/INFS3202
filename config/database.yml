@@ -3,21 +3,21 @@ development:
   encoding: unicode
   database: infs3202_dev
   pool: 5
-  username: infs3202
-  password: infs3202
+  username: postgres
+  password: postgres
 
 test:
   adapter: postgresql
   encoding: unicode
   database: infs3202_test
   pool: 5
-  username: infs3202
-  password: infs3202
+  username: postgres
+  password: postgres
 
 production:
   adapter: postgresql
   encoding: unicode
   database: infs3202_prod
   pool: 5
-  username: infs3202
-  password: infs3202
+  username: postgres
+  password: postgres

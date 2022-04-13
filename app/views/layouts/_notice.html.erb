@@ -1,0 +1,26 @@
+<% if flash[:message] %>
+<% if flash[:success] == 'true' %>
+    <div class="alert alert-success" role="alert" id="alert_bar">
+<% elsif flash[:success] == 'false'%>
+    <div class="alert alert-danger" role="alert" id="alert_bar">
+<% else %>
+    <div class="alert alert-warning" role="alert" id="alert_bar">
+<% end %>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <%= flash[:message] %>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><button type="button" class="btn-close" aria-label="Close" onclick="delete_emement_by_id('alert_bar')"></button></li>
+                </ul>
+            </div>
+        </nav>
+        <% if flash[:errors] %>
+            <ul>
+                <% flash[:errors].each do |error| %>
+                    <li> <%= error[0].capitalize.gsub("_", " ") %> <%= error[1][0] %> </li>
+                <% end %>
+            </ul>
+        <% end %>
+    </div>
+    <%= javascript_include_tag :delete_element %>
+<% end %>

@@ -78,5 +78,4 @@ gem 'postgresql', '~> 1.0'
 # User Password hashing
 gem 'bcrypt', '~> 3.1', '>= 3.1.17'
 
-# Bootstrap
-gem 'bootstrap', '~> 5.1', '>= 5.1.3'
+gem 'sassc-rails'

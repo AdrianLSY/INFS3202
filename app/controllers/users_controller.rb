@@ -36,13 +36,19 @@ class UsersController < ApplicationController
   
     def create
         @user = User.create(user_params)
+
         if @user.valid?
             session[:user_id] = @user.id
-            flash[:success] = "Successfully created an account"
+            flash[:success] = "true"
+            flash[:message] = "Successfully created an account."
             redirect_to "/users"
         else
-            flash[:error] = "Error while creating an account, Please try again"
-            redirect_to new_user_path
+            flash[:success] = "false"
+            flash[:message] = "An error occured while creating an account. Please try again."
+            flash[:errors] = @user.errors
+
+
+            redirect_to register_path
         end
     end
   

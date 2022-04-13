@@ -16,17 +16,21 @@ class SessionsController < ApplicationController
         session_params = params.permit(:email, :password)
         @user = User.find_by(email: session_params[:email])
         if @user && @user.authenticate(session_params[:password])
+            flash[:success] = "true"
+            flash[:message] = "Logged in sucessfully!"
             session[:user_id] = @user.id
             redirect_to "/"
         else
-            flash[:notice] = "Login is invalid!"
+            flash[:success] = "false"
+            flash[:message] = "Email or password is incorrect!"
             redirect_to login_path
         end
     end
 
     def destroy
+        flash[:success] = "true"
+        flash[:message] = "Sucessfully logged out."
         session.delete(:user_id)
-        flash[:notice] = "You have been signed out!"
         redirect_to landing_path
     end
 

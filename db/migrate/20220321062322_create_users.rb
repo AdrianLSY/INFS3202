@@ -5,7 +5,7 @@ class CreateUsers < ActiveRecord::Migration[7.0]
       t.string :last_name
       t.string :email
       t.string :password_digest
-      t.integer :role
+      t.integer :role, default = 0
       t.integer :gold_coin
       t.integer :trophy
       t.timestamps

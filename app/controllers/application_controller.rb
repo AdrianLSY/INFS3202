@@ -28,4 +28,12 @@ class ApplicationController < ActionController::Base
         not_found unless current_user.admin?
     end
     
+    def correct_user?
+      redirect_to landing_path unless current_user = User.find(params[:id])
+    end
+
+    def activated?
+      redirect_to activate_path unless current_user.activated?
+    end
+    
 end

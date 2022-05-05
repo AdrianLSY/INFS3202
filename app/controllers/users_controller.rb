@@ -7,6 +7,15 @@ class UsersController < ApplicationController
         update
         destory
     ]
+    
+    before_action :activated?, only: %i[
+        index
+        show
+        edit
+        update
+        destory
+    ]
+
     before_action :sessioned?, only: %i[
         new
         create
@@ -33,6 +42,27 @@ class UsersController < ApplicationController
     def new
       @user = User.new
     end
+
+    def activate
+    end
+
+    def activated
+        if params[:code] == current_user.register_code
+            current_user.activate()
+            flash[:success] = "true"
+            flash[:message] = "Account successfully activated"
+            redirect_to user_path(current_user.id)
+        else
+            flash[:success] = "false"
+            flash[:message] = "Incorrect 6-digit code"
+            redirect_to activate_path
+        end
+    end
+
+    def regenerate_code
+        current_user.regenerate_regsiter_code()
+        redirect_to activate_path
+    end
   
     def create
         @user = User.create(user_params)
@@ -41,13 +71,11 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             flash[:success] = "true"
             flash[:message] = "Successfully created an account."
-            redirect_to "/users"
+            redirect_to users_path
         else
             flash[:success] = "false"
             flash[:message] = "An error occured while creating an account. Please try again."
             flash[:errors] = @user.errors
-
-
             redirect_to register_path
         end
     end
@@ -62,10 +90,6 @@ class UsersController < ApplicationController
           :password,
           :password_confirmation
         )
-    end
-
-    def correct_user?
-        redirect_to landing_path unless current_user = User.find(params[:id])
     end
 
 end

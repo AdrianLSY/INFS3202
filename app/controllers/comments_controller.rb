@@ -21,7 +21,8 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-    @comment = Comment.new(comment_params)
+    @commentable = find_commentable
+    @comment = @commentable.comments.build(params[:comment])
 
     if @comment.save
       redirect_to @comment, notice: "Comment was successfully created."
@@ -54,5 +55,13 @@ class CommentsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def comment_params
       params.require(:comment).permit(:body)
+    end
+
+    def find_commentable
+      params.each do |name, value|
+        if name =~ /(.+)_id$/
+          return $1.classify.constantize.find(value)
+        end
+      end
     end
 end

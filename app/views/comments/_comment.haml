@@ -2,3 +2,4 @@
   %p
     %strong Body:
     = comment.body
+  = link_to "Reply", new_polymorphic_path([@commentable, Comment.new], :parent_id => comment)

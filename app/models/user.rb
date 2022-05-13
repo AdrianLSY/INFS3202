@@ -12,6 +12,10 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates_presence_of :first_name, :last_name
 
+    has_many :courses, through: :user_courses
+    has_many :posts
+    has_many :comments
+
     before_save :generate_register_code
 
     enum role: %w[student tutor lecturer]

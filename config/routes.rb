@@ -14,4 +14,10 @@ Rails.application.routes.draw do
   resources :sessions, only: [:create]
   resources :users, except: [:new]
 
+  resources :courses do
+    resources :posts do
+      resources :comments
+    end
+  end
+
 end

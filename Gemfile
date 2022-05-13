@@ -78,4 +78,10 @@ gem 'postgresql', '~> 1.0'
 # User Password hashing
 gem 'bcrypt', '~> 3.1', '>= 3.1.17'
 
+# Easier html readibility
+gem 'haml', '~> 5.1', '>= 5.1.2'
+
+# Nested comments
+gem 'ancestry', '~> 4.1'
+
 gem 'sassc-rails'

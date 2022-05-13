@@ -1,0 +1,8 @@
+%p{:style => "color: green"}= notice
+%h1 Posts
+#posts
+  - @posts.each do |post|
+    = render post
+    %p
+      = link_to "Show this post", [@course, post]
+= link_to "New post", new_course_post_path(@course)

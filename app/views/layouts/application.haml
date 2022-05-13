@@ -1,0 +1,15 @@
+!!!
+%html
+  %body
+    - if params[:yeild_only] == 'true'
+      = yield
+    - else
+      %title INFS3202
+      %meta{:content => "width=device-width,initial-scale=1", :name => "viewport"}/
+      = csrf_meta_tags
+      = csp_meta_tag
+      = stylesheet_link_tag "application", "data-turbo-track": "reload"
+      = render 'layouts/nav'
+      = render 'layouts/notice'
+      = yield
+      = javascript_include_tag :bootstrap

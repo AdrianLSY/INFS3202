@@ -1,0 +1,6 @@
+= form_with url: activated_path, method: :post do |form|
+  = form.label :query, "Enter your 6-digit code:"
+  = form.text_field :code
+  = form.submit "Search"
+%button.btn.nav-link.text-primary{:onclick => "window.location.href='#{regenerate_code_path}'"} resend code
+= current_user.register_code

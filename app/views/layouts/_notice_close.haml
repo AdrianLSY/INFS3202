@@ -1,0 +1,6 @@
+%nav.navbar.navbar-inverse
+  .container-fluid
+    = flash[:message]
+    %ul.nav.navbar-nav.navbar-right
+      %li
+        %button.btn-close{"aria-label" => "Close", :onclick => "delete_emement_by_id('alert_bar')", :type => "button"}

@@ -1,0 +1,34 @@
+= form_with(model: @user, local: true) do |form|
+  .modal-dialog{:role => "document"}
+    .modal-content{:style => ""}
+      .modal-header.text-center
+        %h4.modal-title.w-100.font-weight-bold Register
+      #c_form-h.m-3
+        .form-group.row
+          %label.col-2.col-form-label{:for => "inputmailh"} E-mail
+          .col-10
+            = form.text_field :email, class:"form-control", id:"inputmailh", placeholder:"mail@example.com"
+        %br/
+        .form-group.row
+          %label.col-2.col-form-label{:for => "inputpasswordh"} Password
+          .col-10
+            = form.password_field :password, class:"form-control", id:"inputpasswordh", placeholder:"Password"
+        %br/
+        .form-group.row
+          %label.col-2.col-form-label{:for => "inputpasswordh"} Confirm
+          .col-10
+            = form.password_field :password_confirmation, class:"form-control", id:"inputpasswordh", placeholder:"Re-type your Password"
+        %hr/
+        .row
+          .col-sm
+            First Name
+          .col-sm
+            Last Name
+        .row
+          .col-sm
+            = form.text_field :first_name, class:"form-control", id:"first_name", placeholder:"Name"
+          .col-sm
+            = form.text_field :last_name, class:"form-control", id:"last_name", placeholder:"Surname"
+        %br/
+      .modal-footer.d-flex.justify-content-center
+        = form.submit "Submit", class:"btn btn-default modal-title w-100 font-weight-bold"

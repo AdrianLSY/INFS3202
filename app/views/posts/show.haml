@@ -1,0 +1,6 @@
+%p{:style => "color: green"}= notice
+= render @post
+%div
+  = link_to "Edit this post", edit_course_post_path(@course, @post)
+  |
+  \#{link_to "Back to posts", course_posts_path(@course)}#{button_to "Destroy this post", [@course, @post], method: :delete}

@@ -1,3 +1,5 @@
+= params
+
 = form_with(model:[@course, @post, comment]) do |form|
   - if comment.errors.any?
     %div{:style => "color: red"}
@@ -10,5 +12,6 @@
   %div
     = form.label :body, style: "display: block"
     = form.text_area :body
+    = form.hidden_field :parent_id, value: params[:parent_id]
   %div
     = form.submit

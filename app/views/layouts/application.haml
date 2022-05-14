@@ -11,5 +11,6 @@
       = stylesheet_link_tag "application", "data-turbo-track": "reload"
       = render 'layouts/nav'
       = render 'layouts/notice'
-      = yield
+      %div.container.p-4
+        = yield
       = javascript_include_tag :bootstrap

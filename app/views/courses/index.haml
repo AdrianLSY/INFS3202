@@ -1,8 +1,13 @@
-%p{:style => "color: green"}= notice
-%h1 Courses
-#courses
-  - @courses.each do |course|
-    = render course
-    %p
-      = link_to "Show this course", course
-= link_to "New course", new_course_path
+.row
+  .col-10
+    %h2.text-cente All Courses
+  - if !current_user.admin?
+    = render 'layouts/ajax_popup'
+    .col-2
+      %button.btn.nav-link.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_path}?yeild_only=true', 'ajax_content')"} Create a Course
+.row
+  %ul.list-group
+    - @courses.each do |course|
+      %li.list-group-item
+        %h2 
+          %button.btn.btn.nav-link.fs-5{:onclick => "window.location.href='#{course_path(course.id)}'"} #{render course}

@@ -1,13 +1,4 @@
 class User < ApplicationRecord
-    
-    # t.string :first_name
-    # t.string :last_name
-    # t.string :email
-    # t.string :password_digest
-    # t.integer :role
-    # t.integer :register_code, default: ''
-    # t.boolean :activated, default: false
-
     has_secure_password
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates_presence_of :first_name, :last_name
@@ -18,7 +9,7 @@ class User < ApplicationRecord
 
     before_save :generate_register_code
 
-    enum role: %w[student tutor lecturer]
+    enum role: %w[student tutor lecturer admin]
 
     def activate()
         self.activated = true

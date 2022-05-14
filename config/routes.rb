@@ -5,7 +5,7 @@ Rails.application.routes.draw do
 
   get '/register', to: 'users#new', as: 'register'
   get '/login', to: 'sessions#new', as: 'login'
-  get '/logout', to: 'sessions#destroy', as: 'logout'
+  delete '/logout', to: 'sessions#destroy', as: 'logout'
 
   get '/activate', to: 'users#activate', as: 'activate'
   post '/activate', to: 'users#activated', as: 'activated'

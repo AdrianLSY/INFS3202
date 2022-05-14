@@ -1,17 +1,17 @@
 = form_with(model: course) do |form|
-  - if course.errors.any?
-    %div{:style => "color: red"}
-      %h2
-        = pluralize(course.errors.count, "error")
-        prohibited this course from being saved:
-      %ul
-        - course.errors.each do |error|
-          %li= error.full_message
-  %div
-    = form.label :code, style: "display: block"
-    = form.text_field :code
-  %div
-    = form.label :name, style: "display: block"
-    = form.text_field :name
-  %div
-    = form.submit
+  .modal-dialog{:role => "document"}
+    .modal-content{:style => ""}
+      .modal-header.text-center
+        %h4.modal-title.w-100.font-weight-bold New Course
+      #c_form-h.m-3
+        .form-group.row
+          %label.col-2.col-form-label{:for => "inputmailh"} Code
+          .col-10
+            = form.text_field :code, class:"form-control", placeholder:"Course Code"
+        %br/
+        .form-group.row
+          %label.col-2.col-form-label{:for => "inputpasswordh"} Name
+          .col-10
+            = form.text_field :name, class:"form-control", placeholder:"Course Name"
+      .modal-footer.d-flex.justify-content-center
+        = submit_tag "Submit", class:"btn btn-default modal-title w-100 font-weight-bold"

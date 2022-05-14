@@ -1,6 +1,6 @@
 .row
   .col-10
-    %h2.text-cente All Courses
+    %h2 All Courses
   - if !current_user.admin?
     = render 'layouts/ajax_popup'
     .col-2
@@ -9,5 +9,4 @@
   %ul.list-group
     - @courses.each do |course|
       %li.list-group-item
-        %h2 
-          %button.btn.btn.nav-link.fs-5{:onclick => "window.location.href='#{course_path(course.id)}'"} #{render course}
+        #{button_to course.to_s, course_path(course.id), method: :get, :class => "button btn btn nav-link fs-5"}

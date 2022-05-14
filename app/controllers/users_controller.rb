@@ -48,7 +48,7 @@ class UsersController < ApplicationController
 
     def activated
         if params[:code] == current_user.register_code
-            current_user.activate()
+            current_user.activate
             flash[:success] = "true"
             flash[:message] = "Account successfully activated"
             redirect_to user_path(current_user.id)
@@ -60,7 +60,7 @@ class UsersController < ApplicationController
     end
 
     def regenerate_code
-        current_user.regenerate_regsiter_code()
+        current_user.regenerate_regsiter_code
         redirect_to activate_path
     end
   

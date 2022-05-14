@@ -11,17 +11,17 @@ class User < ApplicationRecord
 
     enum role: %w[student tutor lecturer admin]
 
-    def activate()
+    def activate
         self.activated = true
         self.save
     end
 
-    def deactivate()
+    def deactivate
         self.activated = false
         self.save
     end
 
-    def generate_register_code()
+    def generate_register_code
         code = ''
         6.times do
             code += rand(0..9).to_s
@@ -29,8 +29,8 @@ class User < ApplicationRecord
         self.register_code = code
     end
 
-    def regenerate_regsiter_code()
-        self.generate_register_code()
+    def regenerate_regsiter_code
+        self.generate_register_code
         self.save
     end
 

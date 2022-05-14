@@ -5,4 +5,8 @@ class Course < ApplicationRecord
     has_many :posts, dependent: :destroy
     has_many :users, through: :user_courses
 
+    def to_s
+        return "#{self.code} | #{self.name}"
+    end
+
 end

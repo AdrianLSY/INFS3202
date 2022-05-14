@@ -12,10 +12,10 @@
       = render 'layouts/ajax_popup'
     - else
       %li.nav-item
-        #{link_to "Courses", courses_path, :class => "nav-link fw-bold"}
+        #{button_to "Courses", courses_path, method: :get, :class => "button btn nav-link fw-bold"}
 
       %li.nav-item
-        #{link_to "Account", user_path(current_user.id), :class => "nav-link fw-bold"}
+        #{button_to "Account", user_path(current_user.id), method: :get, :class => "button btn nav-link fw-bold"}
       %li.nav-item
-        #{button_to "Logout", logout_path,method: :delete, :class => "button btn nav-link fw-bold"}
+        #{button_to "Logout", logout_path, method: :delete, :class => "button btn nav-link fw-bold"}
     = javascript_include_tag :ajax_get_page

@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :get_course
+  before_action :get_post
   before_action :set_comment, only: %i[ show edit update destroy ]
 
   # GET /comments
@@ -21,11 +23,11 @@ class CommentsController < ApplicationController
 
   # POST /comments
   def create
-    @commentable = find_commentable
-    @comment = @commentable.comments.build(params[:comment])
-
+    @comment = @post.comments.build(comment_params)
+    @comment.user = current_user
+    @comment.post = @post
     if @comment.save
-      redirect_to @comment, notice: "Comment was successfully created."
+      redirect_to course_post_comments_path, notice: "Comment was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -57,11 +59,12 @@ class CommentsController < ApplicationController
       params.require(:comment).permit(:body)
     end
 
-    def find_commentable
-      params.each do |name, value|
-        if name =~ /(.+)_id$/
-          return $1.classify.constantize.find(value)
-        end
-      end
+    def get_course
+      @course = Course.find(params[:course_id])
     end
+
+    def get_post
+      @post = Post.find(params[:post_id])
+    end
+
 end

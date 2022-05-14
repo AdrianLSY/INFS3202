@@ -4,5 +4,5 @@
   - @comments.each do |comment|
     = render comment
     %p
-      = link_to "Show this comment", comment
+      = link_to "Show this comment", [@course, @post, comment]
 = link_to "New comment", new_course_post_comment_path

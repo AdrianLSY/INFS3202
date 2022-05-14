@@ -21,7 +21,7 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      redirect_to course_posts_path(@course), notice: "Post was successfully created."
+      redirect_to course_posts_path, notice: "Post was successfully created."
     else
       render :new, status: :unprocessable_entity
     end
@@ -29,7 +29,7 @@ class PostsController < ApplicationController
 
   def update
     if @post.update(post_params)
-      redirect_to course_posts_path(@course), notice: "Post was successfully updated."
+      redirect_to course_posts_path, notice: "Post was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
   def destroy
     @post.destroy
-    redirect_to course_posts_path(@course), notice: "Post was successfully destroyed."
+    redirect_to course_posts_path, notice: "Post was successfully destroyed."
   end
 
   private

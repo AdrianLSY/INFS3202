@@ -1,21 +1,23 @@
 %nav.navbar.navbar-expand-md.navbar-dark.bg-dark.container-fluid
-  %a.navbar-brand{:href => landing_path} Cobbl
-  .container-fluid
+  .container
+    .col
+      %a.navbar-brand{:href => landing_path} Cobbl
+  .container
   .d-flex
     - if current_user.nil?
       - unless current_page?(register_path)
-        %li.nav-item
+        .col
           %button.btn.nav-link.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{register_path}?yeild_only=true', 'ajax_content')"} Register
       - unless current_page?(login_path)
-        %li.nav-item
+        .col
           %button.btn.nav-link.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{login_path}?yeild_only=true', 'ajax_content')"} Login
       = render 'layouts/ajax_popup'
     - else
-      %li.nav-item
+      .col
         #{button_to "Courses", courses_path, method: :get, :class => "button btn nav-link fw-bold"}
 
-      %li.nav-item
+      .col
         #{button_to "Account", user_path(current_user.id), method: :get, :class => "button btn nav-link fw-bold"}
-      %li.nav-item
+      .col
         #{button_to "Logout", logout_path, method: :delete, :class => "button btn nav-link fw-bold"}
     = javascript_include_tag :ajax_get_page

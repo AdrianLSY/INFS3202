@@ -1,10 +1,11 @@
 .row
   .col-10
-    %h2 All Courses
+    %h3 All Courses
   - if !current_user.admin?
     = render 'layouts/ajax_popup'
     .col-2
-      %button.btn.nav-link.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_path}?yeild_only=true', 'ajax_content')"} Create a Course
+      %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_path}?yeild_only=true', 'ajax_content')"} New Course
+%br/
 .row
   %ul.list-group
     - @courses.each do |course|

@@ -1,9 +1,11 @@
-.row
-  .col-10
-    %h3 All Posts
-  .col-2
-    = render 'layouts/ajax_popup'
-    %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_path}?yeild_only=true', 'ajax_content')"} New Post
+.nav
+  .col
+    .d-flex.float-start
+      %h3 All Posts
+  .col 
+    .d-flex.float-end
+      = render 'layouts/ajax_popup'
+      %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_path(:yeild_only => true)}', 'ajax_content')"} New Post
 %br/
 - @posts.each do |post|
   = render post

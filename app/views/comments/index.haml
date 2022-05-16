@@ -1,3 +1,12 @@
-%h1 Comments
+.nav
+  .col
+    .d-flex.float-start
+      %h3 Comments
+  .col 
+    .d-flex.float-end
+      = render 'layouts/ajax_popup'
+      %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_comment_path(:yeild_only => true)}', 'ajax_content')"} New Comment
 %br/
-= nested_comments(@post.comments.arrange)
+.card
+  .card-body
+    = nested_comments(@post.comments.arrange)

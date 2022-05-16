@@ -1,3 +1,9 @@
-= course.code
-|
-= course.name
+.nav
+  .col
+    .d-flex.float-start
+      %h3 
+        #{button_to course.to_s, course_path(course), method: :get, :class => "btn btn-link btn-sm text-decoration-none fs-5"}
+  - if !current_user.admin?
+    .d-flex.float-end
+      #{button_to "Edit", edit_course_path(course), method: :get, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}
+      #{button_to "Delete", course, method: :delete, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}

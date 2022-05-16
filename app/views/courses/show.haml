@@ -1,13 +1,1 @@
-.container
-  .row
-    .col-10
-      %h3 
-        = render @course
-    - if !current_user.admin?
-      .col-1
-        #{button_to "Edit", edit_course_path(@course), method: :get, :class => "button btn nav-link fw-bold"}
-      .col-1
-        #{button_to "Delete", @course, method: :delete, :class => "button btn nav-link fw-bold"}
-
-
-
+= render @course

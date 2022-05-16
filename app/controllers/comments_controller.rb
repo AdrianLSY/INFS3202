@@ -35,8 +35,9 @@ class CommentsController < ApplicationController
 
   # PATCH/PUT /comments/1
   def update
+    params[:comment][:parent_id] = @comment.parent_id
     if @comment.update(comment_params)
-      redirect_to @comment, notice: "Comment was successfully updated."
+      redirect_to course_post_comments_path(@course, @post), notice: "Comment was successfully updated."
     else
       render :edit, status: :unprocessable_entity
     end

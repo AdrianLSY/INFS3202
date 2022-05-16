@@ -1,15 +1,15 @@
 .card
   .card-header
-    #{link_to post.title, course_post_path(@course, post), method: :get, :class => "text-decoration-none fs-4 text-dark"}
+    #{link_to post.title, course_post_path(@course, post), method: :get, :class => "text-decoration-none fs-4"}
   .card-body
     = post.body
   .card-footer.text-muted
-    .row
+    .nav
       .col
         .d-flex.float-start
-          #{link_to post.user.to_s, user_path(post.user), method: :get, :class => "text-decoration-none text-primaru"}
+          #{button_to post.user.to_s, user_path(post.user), method: :get, :class => "btn btn-link btn-sm text-decoration-none"}
       - if post.user == current_user
         .col
           .d-flex.float-end
-            #{button_to "Edit", edit_course_post_path(@course, post), method: :get, :class => "button btn nav-link fw-bold"}
-            #{button_to "Delete", [@course, post], method: :delete, :class => "button btn nav-link fw-bold"}
+            #{button_to "Edit", edit_course_post_path(@course, post), method: :get, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}
+            #{button_to "Delete", [@course, post], method: :delete, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}

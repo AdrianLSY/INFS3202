@@ -1,5 +1,7 @@
 %div
-  %p
-    %strong Body:
+  .fw-bold
+    = comment.user.to_s()
+  %div 
     = comment.body
-  = link_to "Reply", new_course_post_comment_path(@course, @post, :parent_id => comment)
+  %div 
+    = link_to "Reply", new_course_post_comment_path(@course, @post, :parent_id => comment)

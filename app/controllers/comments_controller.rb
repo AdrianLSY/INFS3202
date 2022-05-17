@@ -59,6 +59,10 @@ class CommentsController < ApplicationController
     redirect_to course_post_path(@course, @post)
   end
 
+  def award
+    @comment.user.collect_award(current_user, nil, @comment)
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment

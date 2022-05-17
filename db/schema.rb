@@ -16,11 +16,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_17_162513) do
 
   create_table "awards", force: :cascade do |t|
     t.bigint "user_id"
+    t.bigint "backer_id"
     t.bigint "post_id"
     t.bigint "comment_id"
-    t.integer "type", default: 0
+    t.integer "award_type", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["backer_id"], name: "index_awards_on_backer_id"
     t.index ["comment_id"], name: "index_awards_on_comment_id"
     t.index ["post_id"], name: "index_awards_on_post_id"
     t.index ["user_id"], name: "index_awards_on_user_id"
@@ -89,7 +91,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_05_17_162513) do
 
   add_foreign_key "awards", "comments"
   add_foreign_key "awards", "posts"
-  add_foreign_key "awards", "users"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "posts", "courses"

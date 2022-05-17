@@ -25,7 +25,7 @@ class User < ApplicationRecord
     end
 
     def generate_register_code
-        code = ''
+        code = ""
         6.times do
             code += rand(0..9).to_s
         end
@@ -36,6 +36,15 @@ class User < ApplicationRecord
         self.generate_register_code
         self.save
     end
+
+    def collect_award(backer, post, comment)
+        award = Award.new
+        award.user = self
+        award.backer = backer
+        award.post = post
+        award.comment = comment
+        if backer.role_before_type_cast != 0
+          award.award_type = 1
 
     def to_s
         return "#{self.first_name} #{self.last_name}"

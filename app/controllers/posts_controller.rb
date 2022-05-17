@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   end
 
   def show
+    asd
   end
 
   def new
@@ -49,6 +50,10 @@ class PostsController < ApplicationController
     flash[:message] = "Post has been deleted."
     @post.destroy
     redirect_to course_path(@course)
+  end
+
+  def award
+    @post.user.collect_award(current_user, @post, nil)
   end
 
   private

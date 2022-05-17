@@ -10,3 +10,6 @@
       #{button_to "Delete", course, method: :delete, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}
       - if action_name != 'index'
         = render 'layouts/ajax_popup'
+
+- if controller_name == 'courses' and action_name == 'show'
+  = render :template => 'posts/index', :locals => {:course_id => course.id}

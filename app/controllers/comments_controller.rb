@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:success] = "true"
       flash[:message] = "Successfully left a comment."
-      redirect_to course_post_comments_path
+      redirect_to course_post_path(@course, @post)
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while leaving a comment. Please try again."
@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       flash[:success] = "true"
       flash[:message] = "Successfully updated the comment"
-      redirect_to course_post_comments_path(@course, @post), notice: "Comment was successfully updated."
+      redirect_to course_post_path(@course, @post)
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while updating a comment. Please try again."
@@ -56,7 +56,7 @@ class CommentsController < ApplicationController
   def destroy
     flash[:message] = "Comment has been deleted."
     @comment.destroy
-    redirect_to course_post_comments_path, notice: "Comment was successfully destroyed."
+    redirect_to course_post_path(@course, @post)
   end
 
   private

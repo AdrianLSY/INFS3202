@@ -1,3 +1,9 @@
+- if controller_name == 'posts' and action_name == 'show'
+  .nav
+    #{button_to "Back", course_path(@course), method: :get, :class => "button btn btn-primary fs-6 fw-bold"}
+    .col
+      = render @course
+
 .card
   .card-header
     #{link_to post.title, course_post_path(@course, post), method: :get, :class => "text-decoration-none fs-4"}
@@ -16,3 +22,6 @@
             #{button_to "Delete", [@course, post], method: :delete, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}
             - if action_name != 'index'
               = render 'layouts/ajax_popup'
+%br/
+- if controller_name == 'posts' and action_name == 'show'
+  = render :template => 'comments/index', :locals => {:course_id => post.course.id, :post_id => post.id}

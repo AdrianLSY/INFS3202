@@ -5,7 +5,10 @@
   .col 
     .d-flex.float-end
       = render 'layouts/ajax_popup'
-      %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_path(:yeild_only => true)}', 'ajax_content')"} New Post
+      - if defined? course_id
+        %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_path(:course_id => course_id ,:yeild_only => true)}', 'ajax_content')"} New Post
+      - else
+        %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_path(:yeild_only => true)}', 'ajax_content')"} New Post
 %br/
 - @posts.each do |post|
   = render post

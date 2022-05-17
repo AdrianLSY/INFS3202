@@ -23,7 +23,7 @@ class PostsController < ApplicationController
     if @post.save
       flash[:success] = "true"
       flash[:message] = "Successfully created a post."
-      redirect_to course_posts_path
+      redirect_to course_path(@course)
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while creating a course. Please try again."
@@ -36,7 +36,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       flash[:success] = "true"
       flash[:message] = "Successfully updated the post."
-      redirect_to course_posts_path
+      redirect_to course_path(@course)
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while editing the post. Please try again."
@@ -48,7 +48,7 @@ class PostsController < ApplicationController
   def destroy
     flash[:message] = "Post has been deleted."
     @post.destroy
-    redirect_to course_posts_path
+    redirect_to course_path(@course)
   end
 
   private

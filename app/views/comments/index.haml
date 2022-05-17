@@ -5,7 +5,10 @@
   .col 
     .d-flex.float-end
       = render 'layouts/ajax_popup'
-      %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_comment_path(:yeild_only => true)}', 'ajax_content')"} New Comment
+      - if defined? post_id
+        %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_comment_path(:post_id => post_id, :yeild_only => true)}', 'ajax_content')"} New Comment
+      - else
+        %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_comment_path(:yeild_only => true)}', 'ajax_content')"} New Comment
 %br/
 .card
   .card-body

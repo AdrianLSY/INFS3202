@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
+  before_action :get_posts, only: %i[ show ]
 
   # GET /courses
   def index
@@ -60,6 +61,10 @@ class CoursesController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_course
       @course = Course.find(params[:id])
+    end
+
+    def get_posts
+      @posts = @course.posts
     end
 
     # Only allow a list of trusted parameters through.

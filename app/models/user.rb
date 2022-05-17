@@ -3,9 +3,12 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates_presence_of :first_name, :last_name
 
+    has_many :user_courses, dependent: :destroy
     has_many :courses, through: :user_courses
-    has_many :posts
-    has_many :comments
+
+    has_many :posts, dependent: :destroy
+    has_many :comments, dependent: :destroy
+    has_many :awards, dependent: :destroy
 
     before_save :generate_register_code
 

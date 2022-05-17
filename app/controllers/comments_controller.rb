@@ -27,9 +27,14 @@ class CommentsController < ApplicationController
     @comment.user = current_user
     @comment.post = @post
     if @comment.save
-      redirect_to course_post_comments_path, notice: "Comment was successfully created."
+      flash[:success] = "true"
+      flash[:message] = "Successfully left a comment."
+      redirect_to new_course_post_comment_path
     else
-      render :new, status: :unprocessable_entity
+      flash[:success] = "false"
+      flash[:message] = "An error occured while leaving a comment. Please try again."
+      flash[:errors] = @comment.errors
+      redirect_to edit_course_post_comment_path
     end
   end
 
@@ -37,14 +42,19 @@ class CommentsController < ApplicationController
   def update
     params[:comment][:parent_id] = @comment.parent_id
     if @comment.update(comment_params)
+      flash[:success] = "true"
+      flash[:message] = "An error occured while leaving a comment. Please try again."
       redirect_to course_post_comments_path(@course, @post), notice: "Comment was successfully updated."
     else
+      flash[:success] = "false"
+      flash[:message] = "Successfully updated the post."
       render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /comments/1
   def destroy
+    flash[:message] = "Comment has been deleted."
     @comment.destroy
     redirect_to course_post_comments_path, notice: "Comment was successfully destroyed."
   end

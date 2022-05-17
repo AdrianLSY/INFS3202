@@ -5,5 +5,8 @@
         #{button_to course.to_s, course_path(course), method: :get, :class => "btn btn-link btn-sm text-decoration-none fs-5"}
   - if !current_user.admin?
     .d-flex.float-end
-      #{button_to "Edit", edit_course_path(course), method: :get, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}
+      %form(action="javascript:void(0)") 
+        %button.form.btn.btn-link.btn-sm.text-decoration-none.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :onclick => "ajax_get_page('GET', '#{edit_course_path(course, :yeild_only => true)}', 'ajax_content')"} Edit
       #{button_to "Delete", course, method: :delete, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}
+      - if action_name != 'index'
+        = render 'layouts/ajax_popup'

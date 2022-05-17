@@ -7,5 +7,5 @@
     .d-flex.float-start
       %button.btn.btn-link.btn-sm.text-decoration-none{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_post_comment_path(@course, @post, :parent_id => comment, :yeild_only => true)}', 'ajax_content')"} Reply
       - if comment.user == current_user
-        #{button_to "Edit", edit_course_post_comment_path(@course, @post, comment), method: :get, :class => "btn btn-link btn-sm text-decoration-none"}
+        %button.form.btn.btn-link.btn-sm.text-decoration-none{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :onclick => "ajax_get_page('GET', '#{edit_course_post_comment_path(@course, @post, comment, :yeild_only => true)}', 'ajax_content')"} Edit
         #{button_to "Delete", [@course, @post, comment], method: :delete, :class => "btn btn-link btn-sm text-decoration-none"}

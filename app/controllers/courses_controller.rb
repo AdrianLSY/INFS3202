@@ -26,7 +26,7 @@ class CoursesController < ApplicationController
     if @course.save
       flash[:success] = "true"
       flash[:message] = "Successfully created a course."
-      redirect_to @course
+      redirect_to courses_path
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while creating a course. Please try again."
@@ -40,7 +40,7 @@ class CoursesController < ApplicationController
     if @course.update(course_params)
       flash[:success] = "true"
       flash[:message] = "Successfully edited the course."
-      redirect_to @course
+      redirect_to courses_path
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while editing the course. Please try again."

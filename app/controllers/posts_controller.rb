@@ -21,23 +21,34 @@ class PostsController < ApplicationController
     @post.user = current_user
 
     if @post.save
-      redirect_to course_posts_path, notice: "Post was successfully created."
+      flash[:success] = "true"
+      flash[:message] = "Successfully created a post."
+      redirect_to course_posts_path
     else
-      render :new, status: :unprocessable_entity
+      flash[:success] = "false"
+      flash[:message] = "An error occured while creating a course. Please try again."
+      flash[:errors] = @course.errors
+      redirect_to new_course_post_path
     end
   end
 
   def update
     if @post.update(post_params)
-      redirect_to course_posts_path, notice: "Post was successfully updated."
+      flash[:success] = "true"
+      flash[:message] = "Successfully updated the post."
+      redirect_to course_posts_path
     else
-      render :edit, status: :unprocessable_entity
+      flash[:success] = "false"
+      flash[:message] = "An error occured while editing the post. Please try again."
+      flash[:errors] = @post.errors
+      redirect_to edit_course_posts_path
     end
   end
 
   def destroy
+    flash[:message] = "Post has been deleted."
     @post.destroy
-    redirect_to course_posts_path, notice: "Post was successfully destroyed."
+    redirect_to course_posts_path
   end
 
   private

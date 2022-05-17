@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:success] = "true"
       flash[:message] = "Successfully left a comment."
-      redirect_to course_post_comment_path
+      redirect_to course_post_comments_path
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while leaving a comment. Please try again."

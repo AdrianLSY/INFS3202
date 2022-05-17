@@ -29,7 +29,7 @@ class CommentsController < ApplicationController
     if @comment.save
       flash[:success] = "true"
       flash[:message] = "Successfully left a comment."
-      redirect_to new_course_post_comment_path
+      redirect_to course_post_comments_path
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while leaving a comment. Please try again."
@@ -43,12 +43,12 @@ class CommentsController < ApplicationController
     params[:comment][:parent_id] = @comment.parent_id
     if @comment.update(comment_params)
       flash[:success] = "true"
-      flash[:message] = "An error occured while leaving a comment. Please try again."
+      flash[:message] = "Successfully updated the comment"
       redirect_to course_post_comments_path(@course, @post), notice: "Comment was successfully updated."
     else
       flash[:success] = "false"
-      flash[:message] = "Successfully updated the post."
-      render :edit, status: :unprocessable_entity
+      flash[:message] = "An error occured while updating a comment. Please try again."
+      redirect_to edit_course_post_comment_path
     end
   end
 

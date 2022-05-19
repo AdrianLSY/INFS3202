@@ -60,7 +60,7 @@ class CommentsController < ApplicationController
   end
 
   def award
-    @comment.user.collect_award(current_user, nil, @comment)
+    @comment.user.toggle_reward(current_user, nil, @comment)
   end
 
   private

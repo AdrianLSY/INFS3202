@@ -1,5 +1,5 @@
 class Award < ApplicationRecord
-    enum award_type: %w[gold_coin trophy]
+    enum award_type: %w[medal trophy]
 
     belongs_to :user
     belongs_to :backer, class_name: "User"

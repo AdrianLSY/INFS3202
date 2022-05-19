@@ -53,7 +53,7 @@ class PostsController < ApplicationController
   end
 
   def award
-    @post.user.collect_award(current_user, @post, nil)
+    @post.user.toggle_reward(current_user, @post, nil)
   end
 
   private

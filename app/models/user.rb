@@ -73,5 +73,6 @@ class User < ApplicationRecord
     def awards_to_s
         awards = self.awards.all
         return "Trophies: #{self.awards.where(award_type: 1).count} | Medals: #{self.awards.where(award_type: 0).count}"
+    end
 
 end

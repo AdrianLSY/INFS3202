@@ -13,7 +13,7 @@
     .nav
       .col
         .d-flex.float-start
-          #{button_to post.user.to_s, user_path(post.user), method: :get, :class => "btn btn-link btn-sm text-decoration-none"}
+          #{button_to post.user.full_name_to_s, user_path(post.user), method: :get, :class => "btn btn-link btn-sm text-decoration-none"}
       - if post.user == current_user
         .col
           .d-flex.float-end

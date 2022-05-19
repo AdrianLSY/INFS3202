@@ -7,7 +7,6 @@ class PostsController < ApplicationController
   end
 
   def show
-    asd
   end
 
   def new
@@ -37,7 +36,7 @@ class PostsController < ApplicationController
     if @post.update(post_params)
       flash[:success] = "true"
       flash[:message] = "Successfully updated the post."
-      redirect_to course_path(@course)
+      redirect_back(fallback_location: course_path(@course))
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while editing the post. Please try again."

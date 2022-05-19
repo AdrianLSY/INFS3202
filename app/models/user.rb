@@ -66,13 +66,17 @@ class User < ApplicationRecord
         end
     end
 
-    def to_s
+    def full_name_to_s
         return "#{self.first_name} #{self.last_name}"
     end
 
     def awards_to_s
         awards = self.awards.all
         return "Trophies: #{self.awards.where(award_type: 1).count} | Medals: #{self.awards.where(award_type: 0).count}"
+    end
+
+    def to_s
+        return "#{self.full_name_to_s} (#{self.awards_to_s})"
     end
 
 end

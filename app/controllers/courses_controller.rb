@@ -41,7 +41,7 @@ class CoursesController < ApplicationController
     if @course.update(course_params)
       flash[:success] = "true"
       flash[:message] = "Successfully edited the course."
-      redirect_to courses_path
+      redirect_back(fallback_location: courses_path)
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while editing the course. Please try again."

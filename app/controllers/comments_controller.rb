@@ -44,7 +44,7 @@ class CommentsController < ApplicationController
     if @comment.update(comment_params)
       flash[:success] = "true"
       flash[:message] = "Successfully updated the comment"
-      redirect_to course_post_path(@course, @post)
+      redirect_back(fallback_location: course_post_path(@course, @post))
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while updating a comment. Please try again."

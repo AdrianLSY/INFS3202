@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :get_course
-  before_action :set_post, only: %i[show edit update destroy]
+  before_action :set_post, only: %i[show edit update destroy award]
 
   def index
     @posts = @course.posts
@@ -53,11 +53,16 @@ class PostsController < ApplicationController
 
   def award
     @post.user.toggle_reward(current_user, @post, nil)
+    redirect_back(fallback_location: course_path(@course))
   end
 
   private
     def set_post
-      @post = @course.posts.find(params[:id])
+      if params[:id]
+        @post = @course.posts.find(params[:id])
+      else
+        @post = @course.posts.find(params[:post_id])
+      end
     end
 
     def post_params

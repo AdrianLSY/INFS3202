@@ -6,7 +6,13 @@
 
 .card
   .card-header
-    #{link_to post.title, course_post_path(@course, post), method: :get, :class => "text-decoration-none fs-4"}
+    .nav
+      .col
+        .d-flex.float-start
+          #{link_to post.title, course_post_path(@course, post), method: :get, :class => "text-decoration-none fs-4"}
+      .col
+        .d-flex.float-end
+          = post.awards_to_s
   .card-body
     = post.body
   .card-footer.text-muted
@@ -14,6 +20,7 @@
       .col
         .d-flex.float-start
           #{button_to post.user.full_name_to_s, user_path(post.user), method: :get, :class => "btn btn-link btn-sm text-decoration-none"}
+          #{button_to post.award_bool_to_s(current_user), course_post_award_path(@course, post), method: :put, :class => "btn btn-link btn-sm text-decoration-none"}
       - if post.user == current_user
         .col
           .d-flex.float-end

@@ -1,7 +1,12 @@
 class CommentsController < ApplicationController
+  before_action :logged_in?
+  before_action :activated?
+
   before_action :get_course
   before_action :get_post
   before_action :set_comment, only: %i[show edit update destroy award]
+
+  before_action :awardable?, only: %i[award]
 
   def index
     @comments = @post.comments
@@ -77,6 +82,10 @@ class CommentsController < ApplicationController
 
     def get_post
       @post = Post.find(params[:post_id])
+    end
+
+    def awardable?
+      redirect_back(fallback_location: course_post_path(@course, @post)) if @comment.user == current_user
     end
 
 end

@@ -1,6 +1,11 @@
 class PostsController < ApplicationController
+  before_action :logged_in?
+  before_action :activated?
+
   before_action :get_course
   before_action :set_post, only: %i[show edit update destroy award]
+
+  before_action :awardable?, only: %i[award]
 
   def index
     @posts = @course.posts
@@ -72,4 +77,9 @@ class PostsController < ApplicationController
     def get_course
       @course = Course.find(params[:course_id])
     end
+
+    def awardable?
+      redirect_back(fallback_location: course_path(@course)) if @post.user == current_user
+    end
+
 end

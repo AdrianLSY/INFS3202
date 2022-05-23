@@ -1,36 +1,11 @@
 class UsersController < ApplicationController
 
-    before_action :logged_in?, only: %i[
-        index
-        show
-        edit
-        update
-        destory
-    ]
-    
-    before_action :activated?, only: %i[
-        index
-        show
-        edit
-        update
-        destory
-    ]
+    before_action :logged_in?, only: %i[index show edit update destory]
+    before_action :activated?, only: %i[index show edit update destory]
+    before_action :sessioned?, only: %i[new create]
 
-    before_action :sessioned?, only: %i[
-        new
-        create
-    ]
-
-    before_action :correct_user?, only: %i[
-        show
-        edit
-        update
-        destory
-    ]
-
-    before_action :is_admin?, only: %i[
-        destory
-    ]
+    before_action :correct_user?, only: %i[show edit update destory]
+    before_action :is_admin?, only: %i[destory]
 
     def show
     end

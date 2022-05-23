@@ -18,4 +18,5 @@ class Post < ApplicationRecord
             return "Unreward"
         end
     end
+
 end

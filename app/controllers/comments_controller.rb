@@ -1,27 +1,22 @@
 class CommentsController < ApplicationController
   before_action :get_course
   before_action :get_post
-  before_action :set_comment, only: %i[ show edit update destroy ]
+  before_action :set_comment, only: %i[show edit update destroy award]
 
-  # GET /comments
   def index
     @comments = @post.comments
   end
 
-  # GET /comments/1
   def show
   end
 
-  # GET /comments/new
   def new
     @comment = Comment.new
   end
 
-  # GET /comments/1/edit
   def edit
   end
 
-  # POST /comments
   def create
     @comment = @post.comments.build(comment_params)
     @comment.user = current_user
@@ -38,7 +33,6 @@ class CommentsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /comments/1
   def update
     params[:comment][:parent_id] = @comment.parent_id
     if @comment.update(comment_params)
@@ -61,15 +55,18 @@ class CommentsController < ApplicationController
 
   def award
     @comment.user.toggle_reward(current_user, nil, @comment)
+    redirect_back(fallback_location: course_post_path(@course, @post))
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_comment
-      @comment = Comment.find(params[:id])
+      if params[:id]
+        @comment = Comment.find(params[:id])
+      else
+        @comment = Comment.find(params[:comment_id])
+      end
     end
 
-    # Only allow a list of trusted parameters through.
     def comment_params
       params.require(:comment).permit(:body, :parent_id)
     end

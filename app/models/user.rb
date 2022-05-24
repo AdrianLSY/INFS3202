@@ -3,8 +3,8 @@ class User < ApplicationRecord
     validates :email, presence: true, uniqueness: true, format: { with: URI::MailTo::EMAIL_REGEXP }
     validates_presence_of :first_name, :last_name
 
-    has_many :user_courses, dependent: :destroy
-    has_many :courses, through: :user_courses
+    has_many :enrollment, dependent: :destroy
+    has_many :courses, through: :enrollment
 
     has_many :posts, dependent: :destroy
     has_many :comments, dependent: :destroy
@@ -72,7 +72,15 @@ class User < ApplicationRecord
 
     def awards_to_s
         awards = self.awards.all
-        return "Trophies: #{self.awards.where(award_type: 1).count} | Medals: #{self.awards.where(award_type: 0).count}"
+        return "Trophies : #{awards.where(award_type: 1).count} | Medals: #{awards.where(award_type: 0).count}"
+    end
+
+    def trophies_to_s
+        return "Trophies : #{self.awards.where(award_type: 1).count}"
+    end
+
+    def medals_to_s
+        return "Medals : #{self.awards.where(award_type: 0).count}"
     end
 
     def to_s

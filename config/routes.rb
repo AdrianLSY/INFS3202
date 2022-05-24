@@ -6,9 +6,10 @@ Rails.application.routes.draw do
   delete '/logout', to: 'sessions#destroy', as: 'logout'
 
   get '/activate', to: 'users#activate', as: 'activate'
-  post '/activate', to: 'users#activated', as: 'activated'
-  get '/regerate', to: 'users#regenerate_code', as: 'regenerate_code'
+  put '/activate', to: 'users#activated', as: 'activated'
+  put '/regerate', to: 'users#regenerate_code', as: 'regenerate_code'
 
+  put '/courses/:course_id/enroll', to: 'courses#enroll', as: 'course_enroll'
   put '/courses/:course_id/posts/:post_id/award', to: 'posts#award', as: 'course_post_award'
   put '/courses/:course_id/posts/:post_id/comments/:comment_id/award', to: 'comments#award', as: 'course_post_comment_award'
 

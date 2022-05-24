@@ -1,13 +1,8 @@
 class SessionsController < ApplicationController
 
-    before_action :sessioned?, only: %i[
-        new
-        create
-    ]
+    before_action :sessioned?, only: %i[new create]
 
-    before_action :logged_in?, only: %i[
-        destory
-    ]
+    before_action :logged_in?, only: %i[destory]
 
     def new
     end

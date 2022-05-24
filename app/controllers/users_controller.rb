@@ -4,8 +4,9 @@ class UsersController < ApplicationController
     before_action :activated?, only: %i[index show edit update destory]
     before_action :sessioned?, only: %i[new create]
 
+    before_action :set_user, only: %i[show edit update destroy]
     before_action :correct_user?, only: %i[show edit update destory]
-    before_action :is_admin?, only: %i[destory]
+
 
     def show
     end
@@ -56,6 +57,13 @@ class UsersController < ApplicationController
     end
   
     private 
+    def set_user
+        if params[:id]
+          @user = User.find(params[:id])
+        else
+          @user = User.find(params[:user_id])
+        end
+      end
     
     def user_params
         params.require(:user).permit(
@@ -65,6 +73,10 @@ class UsersController < ApplicationController
           :password,
           :password_confirmation
         )
+    end
+  
+    def correct_user?
+        not_found unless current_user == @user or current_user.admin?
     end
 
 end

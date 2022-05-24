@@ -13,4 +13,6 @@
       = render 'layouts/notice'
       %div.container.p-4
         = yield
+      - if action_name == 'index' or action_name == 'show'
+        = render 'layouts/ajax_popup'
       = javascript_include_tag :bootstrap

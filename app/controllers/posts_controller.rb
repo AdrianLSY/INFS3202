@@ -5,6 +5,9 @@ class PostsController < ApplicationController
   before_action :get_course
   before_action :set_post, only: %i[show edit update destroy award]
 
+  before_action :can_modify?, only: %i[edit update]
+  before_action :can_delete?, only: %i[destroy]
+
   before_action :awardable?, only: %i[award]
 
   def index
@@ -32,7 +35,7 @@ class PostsController < ApplicationController
     else
       flash[:success] = "false"
       flash[:message] = "An error occured while creating a course. Please try again."
-      flash[:errors] = @course.errors
+      flash[:errors] = @post.errors
       redirect_to new_course_post_path
     end
   end
@@ -76,6 +79,14 @@ class PostsController < ApplicationController
 
     def get_course
       @course = Course.find(params[:course_id])
+    end
+
+    def can_modify?
+      not_found unless @post.user == current_user
+    end
+
+    def can_delete?
+      not_found unless @post.user == current_user or !current_user.student?
     end
 
     def awardable?

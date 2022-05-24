@@ -3,28 +3,25 @@ class CoursesController < ApplicationController
   before_action :logged_in?
   before_action :activated?
 
-  before_action :set_course, only: %i[ show edit update destroy ]
-  before_action :get_posts, only: %i[ show ]
+  before_action :set_course, only: %i[show edit update destroy enroll]
+  before_action :get_posts, only: %i[show]
 
-  # GET /courses
+  before_action :is_admin?, only: %i[new edit update destroy]
+
   def index
     @courses = Course.all
   end
 
-  # GET /courses/1
   def show
   end
 
-  # GET /courses/new
   def new
     @course = Course.new
   end
 
-  # GET /courses/1/edit
   def edit
   end
 
-  # POST /courses
   def create
     @course = Course.new(course_params)
 
@@ -40,7 +37,6 @@ class CoursesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /courses/1
   def update
     if @course.update(course_params)
       flash[:success] = "true"
@@ -54,25 +50,32 @@ class CoursesController < ApplicationController
     end
   end
 
-  # DELETE /courses/1
   def destroy
     flash[:message] = "Course has been deleted."
     @course.destroy
     redirect_to courses_url
   end
 
+  def enroll
+    @course.toggle_enrollment(current_user)
+    redirect_back(fallback_location: course_path(@course))
+  end
+
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_course
+  def set_course
+    if params[:id]
       @course = Course.find(params[:id])
+    else
+      @course = Course.find(params[:course_id])
     end
+  end
 
     def get_posts
       @posts = @course.posts
     end
 
-    # Only allow a list of trusted parameters through.
     def course_params
       params.require(:course).permit(:code, :name)
     end
+
 end

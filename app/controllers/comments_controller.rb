@@ -6,6 +6,9 @@ class CommentsController < ApplicationController
   before_action :get_post
   before_action :set_comment, only: %i[show edit update destroy award]
 
+  before_action :can_modify?, only: %i[edit update]
+  before_action :can_delete?, only: %i[destroy]
+
   before_action :awardable?, only: %i[award]
 
   def index
@@ -34,7 +37,7 @@ class CommentsController < ApplicationController
       flash[:success] = "false"
       flash[:message] = "An error occured while leaving a comment. Please try again."
       flash[:errors] = @comment.errors
-      redirect_to edit_course_post_comment_path
+      redirect_to new_course_post_comment_path
     end
   end
 
@@ -82,6 +85,14 @@ class CommentsController < ApplicationController
 
     def get_post
       @post = Post.find(params[:post_id])
+    end
+
+    def can_modify?
+      not_found unless @comment.user == current_user
+    end
+
+    def can_delete?
+      not_found unless @comment.user == current_user or !current_user.student?
     end
 
     def awardable?

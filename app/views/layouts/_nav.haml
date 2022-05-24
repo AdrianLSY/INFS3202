@@ -9,8 +9,9 @@
           %button.btn.nav-link.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{register_path(:yeild_only => true)}', 'ajax_content')"} Register
         - unless current_page?(login_path)
           %button.btn.nav-link.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{login_path(:yeild_only => true)}', 'ajax_content')"} Login
-        = render 'layouts/ajax_popup'
       - else
         #{button_to "Courses", courses_path, method: :get, :class => "button btn nav-link fw-bold"}
         #{button_to "Account", user_path(current_user.id), method: :get, :class => "button btn nav-link fw-bold"}
         #{button_to "Logout", logout_path, method: :delete, :class => "button btn nav-link fw-bold"}
+
+= render 'layouts/ajax_popup'

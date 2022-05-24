@@ -37,6 +37,7 @@ class UsersController < ApplicationController
 
     def regenerate_code
         current_user.regenerate_regsiter_code
+        RMQ_send_message('localhost', 'emailer', "{\"email\":\"#{current_user.email}\",\"first_name\":\"#{current_user.first_name}\",\"last_name\":\"#{current_user.last_name}\",\"register_code\":\"#{current_user.register_code}\"}")
         redirect_to activate_path
     end
   
@@ -44,6 +45,7 @@ class UsersController < ApplicationController
         @user = User.create(user_params)
 
         if @user.valid?
+            RMQ_send_message('localhost', 'emailer', "{\"email\":\"#{@user.email}\",\"first_name\":\"#{@user.first_name}\",\"last_name\":\"#{@user.last_name}\",\"register_code\":\"#{@user.register_code}\"}")
             session[:user_id] = @user.id
             flash[:success] = "true"
             flash[:message] = "Successfully created an account."

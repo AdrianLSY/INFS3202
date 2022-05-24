@@ -1,5 +1,4 @@
 class ApplicationController < ActionController::Base
-
     helper_method :current_user
 
     def current_user
@@ -37,7 +36,15 @@ class ApplicationController < ActionController::Base
     end
 
     def sessioned?
-      redirect_back(fallback_location: landing_path) if current_user
+        redirect_back(fallback_location: landing_path) if current_user
+    end
+
+    def is_admin?
+        not_found unless current_user.admin?
+    end
+
+    def correct_user?
+      redirect_to landing_path unless current_user = User.find(params[:id])
     end
 
     def activated?
@@ -46,6 +53,11 @@ class ApplicationController < ActionController::Base
 
     def logged_in?
       redirect_to login_path if current_user.nil?
+    end
+
+    def RMQ_send_message(host, queue, message)
+      producer = RabbitMQInterface::Producer.new(host, queue)
+      producer.send(message)
     end
 
 end

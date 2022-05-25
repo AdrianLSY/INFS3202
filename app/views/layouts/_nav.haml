@@ -13,5 +13,3 @@
         #{button_to "Courses", courses_path, method: :get, :class => "button btn nav-link fw-bold"}
         #{button_to "Account", user_path(current_user.id), method: :get, :class => "button btn nav-link fw-bold"}
         #{button_to "Logout", logout_path, method: :delete, :class => "button btn nav-link fw-bold"}
-
-= render 'layouts/ajax_popup'

@@ -1,7 +1,6 @@
 class CoursesController < ApplicationController
 
   before_action :logged_in?
-  before_action :activated?
 
   before_action :set_course, only: %i[show edit update destroy enroll]
   before_action :get_posts, only: %i[show]

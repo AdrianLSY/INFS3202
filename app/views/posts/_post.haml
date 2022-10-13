@@ -29,7 +29,12 @@
               %button.form.btn.btn-link.btn-sm.text-decoration-none.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :onclick => "ajax_get_page('GET', '#{edit_course_post_path(@course, post, :yeild_only => true)}', 'ajax_content')"} Edit
           - if post.user == current_user or !current_user.student?
             #{button_to "Delete", [@course, post], method: :delete, :class => "btn btn-link btn-sm text-decoration-none fw-bold"}
-
+%br/
+.py-5
+  .container
+    .row
+      .col-md-10
+        %iframe{:height => "1000", :src => "https://www.online-python.com/online_python_compiler", :width => "1000px"}
 %br/
 - if controller_name == 'posts' and action_name == 'show'
   = render :template => 'comments/index', :locals => {:course_id => post.course.id, :post_id => post.id}

@@ -1,6 +1,5 @@
 class PostsController < ApplicationController
   before_action :logged_in?
-  before_action :activated?
 
   before_action :get_course
   before_action :set_post, only: %i[show edit update destroy award]

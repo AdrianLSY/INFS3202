@@ -7,7 +7,7 @@
       .d-flex.float-end
         %button.btn.btn-primary.fs-6.fw-bold{"data-bs-target" => "#ajax_popup", "data-bs-toggle" => "modal", :id => "", :onclick => "ajax_get_page('GET', '#{new_course_path(:yeild_only => true)}', 'ajax_content')"} New Course
 %br/
-%ul.list-group
-  - @courses.each do |course|
-    %li.list-group-item
+.container 
+  .row
+    - @courses.each do |course|
       = render course

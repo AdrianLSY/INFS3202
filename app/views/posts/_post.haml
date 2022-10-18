@@ -14,10 +14,7 @@
   .card-footer.text-muted
     .nav
       .col
-        .d-flex.float-start
-          #{button_to post.user.full_name_to_s, user_path(post.user), method: :get, :class => "btn btn-link btn-sm text-decoration-none"}
-          - if post.user != current_user
-            #{button_to post.award_bool_to_s(current_user), course_post_award_path(@course, post), method: :put, :class => "btn btn-link btn-sm text-decoration-none"}
+        
       .col
         .d-flex.float-end
           - if post.user == current_user

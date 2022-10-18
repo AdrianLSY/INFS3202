@@ -48,7 +48,7 @@ class UsersController < ApplicationController
             session[:user_id] = @user.id
             flash[:success] = "true"
             flash[:message] = "Successfully created an account."
-            redirect_to users_path
+            redirect_to "/"
         else
             flash[:success] = "false"
             flash[:message] = "An error occured while creating an account. Please try again."

@@ -73,7 +73,6 @@ end
 
 
 # Postgres adapter
-gem 'postgresql', '~> 1.0'
 
 # User Password hashing
 gem 'bcrypt', '~> 3.1', '>= 3.1.17'
